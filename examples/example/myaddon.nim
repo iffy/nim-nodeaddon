@@ -1,3 +1,8 @@
+import addonlib/prelude
+
+proc method2(env: napi_env, args: napi_callback_info):napi_value {.exportc.} =
+  discard
+
 {.emit: """
 #include <node_api.h>
 
@@ -22,6 +27,6 @@ napi_value init(napi_env env, napi_value exports) {
   return exports;
 }
 
-NAPI_MODULE(NODE_GYP_MODULE_NAME, init)
-
 """.}
+
+NapiModule("myaddon", "init")
