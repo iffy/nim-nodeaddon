@@ -15,6 +15,7 @@ napi_value Method(napi_env env, napi_callback_info args) {
   return greeting;
 }
 
+/*
 napi_value init(napi_env env, napi_value exports) {
   napi_status status;
   napi_value fn;
@@ -26,7 +27,23 @@ napi_value init(napi_env env, napi_value exports) {
   if (status != napi_ok) return nullptr;
   return exports;
 }
+*/
 
 """.}
+
+proc init(env: napi_env, exports: napi_value):napi_value {.exportc.} =
+  var env = env
+  var exports = exports
+  {.emit: """
+  napi_status status;
+  napi_value fn;
+
+  status = napi_create_function(env, nullptr, 0, Method, nullptr, &fn);
+  if (status != napi_ok) return nullptr;
+
+  status = napi_set_named_property(env, exports, "hello", fn);
+  if (status != napi_ok) return nullptr;
+  return exports;
+  """.}
 
 NapiModule("myaddon", "init")
