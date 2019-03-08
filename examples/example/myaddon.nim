@@ -1,4 +1,4 @@
-import addonlib/prelude
+import addonlib/lowlevel
 
 proc method2(env: napi_env, args: napi_callback_info):napi_value {.exportc.} =
   discard
