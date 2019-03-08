@@ -32,12 +32,10 @@ napi_value init(napi_env env, napi_value exports) {
 """.}
 
 proc init(env: napi_env, exports: napi_value):napi_value {.exportc.} =
-  var env = env
-  var exports = exports
+  var
+    status: napi_status
+    fn: napi_value
   {.emit: """
-  napi_status status;
-  napi_value fn;
-
   status = napi_create_function(env, nullptr, 0, Method, nullptr, &fn);
   if (status != napi_ok) return nullptr;
 
