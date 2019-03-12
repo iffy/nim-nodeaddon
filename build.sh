@@ -3,7 +3,7 @@
 set -e
 
 [ -e "csrc" ] && rm -r csrc
-nim cpp --compileOnly --nimcache:csrc --header myaddon.nim
+nim cpp --compileOnly --gc:regions --nimcache:csrc --header myaddon.nim
 cp nimbase.h csrc/
 node-gyp clean configure rebuild
 
