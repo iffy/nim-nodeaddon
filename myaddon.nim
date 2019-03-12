@@ -13,7 +13,7 @@ proc init(env: napi_env, exports: napi_value):napi_value {.exportc.} =
   var
     status: napi_status
     fn: napi_value
-  status = napi_create_function(env, "".cstring, 0.csize, testMethod, nil, fn.addr)
+  status = napi_create_function(env, "", 0, testMethod, nil, fn.unsafeAddr)
   if status != napi_ok:
     return
   status = napi_set_named_property(env, exports, "hello", fn)
