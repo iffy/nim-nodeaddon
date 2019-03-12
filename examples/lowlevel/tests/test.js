@@ -1,4 +1,4 @@
-const addon = require('./index');
+const addon = require('../js/index');
 
 console.log("Testing");
 console.log("hello:", addon.doGreeting());

@@ -2,7 +2,7 @@
   "name": "example",
   "version": "0.1.0",
   "description": "Example Node Addon using Nim",
-  "main": "index.js",
+  "main": "./js/index.js",
   "author": "Matt Haggard",
   "license": "MIT"
 }
