@@ -1,14 +1,5 @@
-To build:
+## Notes
 
-```
-./build.sh
-```
-
-To test:
-
-```
-node test.js
-```
 
 I created `js_native_api.nim` and `js_native_api_types.nim` using `c2nim` something like this:
 

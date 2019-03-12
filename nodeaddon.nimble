@@ -2,11 +2,11 @@
 
 version       = "0.1.0"
 author        = "Matt Haggard"
-description   = "Makes making node addons nicer"
+description   = "Library for making NodeJS addons in Nim"
 license       = "MIT"
 srcDir        = "src"
 installExt    = @["nim"]
-bin           = @["nodeaddon"]
+bin           = @["nim_nodeaddon"]
 
 
 # Dependencies

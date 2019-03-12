@@ -21,7 +21,7 @@ const
 
 proc napi_get_last_error_info*(env: napi_env;
                               result: ptr ptr napi_extended_error_info): napi_status {.
-    importcpp: "napi_get_last_error_info(@)", header: "js_native_api.h".}
+    importcpp: "napi_get_last_error_info(#, (const napi_extended_error_info **) #)", header: "js_native_api.h".}
 ##  Getters for defined singletons
 
 proc napi_get_undefined*(env: napi_env; result: ptr napi_value): napi_status {.

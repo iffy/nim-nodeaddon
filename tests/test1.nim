@@ -7,6 +7,6 @@
 
 import unittest
 
-import nodeaddonpkg/submodule
+import nim_nodeaddonpkg/submodule
 test "correct welcome":
   check getWelcomeMessage() == "Hello, World!"
