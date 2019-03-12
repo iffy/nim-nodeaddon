@@ -33,9 +33,9 @@ type
                 header: "js_native_api_types.h".} = enum
     napi_ok, napi_invalid_arg, napi_object_expected, napi_string_expected, napi_name_expected, napi_function_expected, napi_number_expected, napi_boolean_expected, napi_array_expected, napi_generic_failure, napi_pending_exception, napi_cancelled, napi_escape_called_twice, napi_handle_scope_mismatch, napi_callback_scope_mismatch, napi_queue_full, napi_closing, napi_bigint_expected, napi_date_expected
   
-  napi_callback* = proc (env: napi_env; info: napi_callback_info): napi_value {.closure.} 
+  napi_callback* = proc (env: napi_env; info: napi_callback_info): napi_value {.closure,cdecl.} 
   
-  napi_finalize* = proc (env: napi_env; finalize_data: pointer; finalize_hint: pointer)
+  napi_finalize* = proc (env: napi_env; finalize_data: pointer; finalize_hint: pointer) {.closure,cdecl.}
   
   napi_property_descriptor* {.importcpp: "napi_property_descriptor",
                               header: "js_native_api_types.h", bycopy.} = object
