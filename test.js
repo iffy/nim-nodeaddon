@@ -10,5 +10,6 @@ try {
     console.log("Error (which is expected):", err);
 }
 console.log("showArgs:");
-addon.showArgs(1, "two", true, [1,2,3], {"foo": "bar"})
+let result = addon.showArgs(12, "two", true, [1,2,3], {"foo": "bar"});
+console.log("result:", result);
 

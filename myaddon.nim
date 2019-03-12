@@ -12,18 +12,16 @@ proc showArgs(env: napi_env, args: napi_callback_info): napi_value {.exportc, cd
   echo "[nim] showArgs"
   var
     argc: csize = 6
-    argv: napi_value
     this: napi_value
     data: pointer
   echo "argc: ", argc
-  echo "argv: ", argv.repr
   echo "this: ", this.repr
   echo "data: ", data.repr
-  if napi_get_cb_info(env, args, argc.unsafeAddr, argv.unsafeAddr, this.unsafeAddr, data.unsafeAddr) != napi_ok:
+  if napi_get_cb_info(env, args, argc.unsafeAddr, result.unsafeAddr, this.unsafeAddr, data.unsafeAddr) != napi_ok:
     return
   echo "call succeeded"
   echo "argc: ", argc
-  echo "argv: ", argv.repr
+  echo "argv: ", result.repr
   echo "this: ", this.repr
   echo "data: ", data.repr
 
