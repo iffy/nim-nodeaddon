@@ -55,7 +55,7 @@ proc napi_create_string_latin1*(env: napi_env; str: cstring; length: csize;
 proc napi_create_string_utf8*(env: napi_env; str: cstring; length: csize;
                              result: ptr napi_value): napi_status {.
     importcpp: "napi_create_string_utf8(@)", header: "js_native_api.h".}
-proc napi_create_string_utf16*(env: napi_env; str: ptr char16_t; length: csize;
+proc napi_create_string_utf16*(env: napi_env; str: ptr Utf16Char; length: csize;
                               result: ptr napi_value): napi_status {.
     importcpp: "napi_create_string_utf16(@)", header: "js_native_api.h".}
 proc napi_create_symbol*(env: napi_env; description: napi_value;
@@ -100,7 +100,7 @@ proc napi_get_value_string_utf8*(env: napi_env; value: napi_value; buf: cstring;
 ##  Copies UTF-16 encoded bytes from a string into a buffer.
 
 proc napi_get_value_string_utf16*(env: napi_env; value: napi_value;
-                                 buf: ptr char16_t; bufsize: csize; result: ptr csize): napi_status {.
+                                 buf: ptr Utf16Char; bufsize: csize; result: ptr csize): napi_status {.
     importcpp: "napi_get_value_string_utf16(@)", header: "js_native_api.h".}
 ##  Methods to coerce values
 ##  These APIs may execute user scripts

@@ -1,4 +1,3 @@
-import unicode
 
 type
   # JSVM API types are all opaque pointers for ABI stability
@@ -34,7 +33,7 @@ type
                 header: "js_native_api_types.h".} = enum
     napi_ok, napi_invalid_arg, napi_object_expected, napi_string_expected, napi_name_expected, napi_function_expected, napi_number_expected, napi_boolean_expected, napi_array_expected, napi_generic_failure, napi_pending_exception, napi_cancelled, napi_escape_called_twice, napi_handle_scope_mismatch, napi_callback_scope_mismatch, napi_queue_full, napi_closing, napi_bigint_expected, napi_date_expected
   
-  napi_callback* = proc (env: napi_env; info: napi_callback_info): napi_value
+  napi_callback* = proc (env: napi_env; info: napi_callback_info): napi_value {.closure.} 
   
   napi_finalize* = proc (env: napi_env; finalize_data: pointer; finalize_hint: pointer)
   
@@ -55,5 +54,3 @@ type
     engine_reserved* {.importc: "engine_reserved".}: pointer
     engine_error_code* {.importc: "engine_error_code".}: cuint
     error_code* {.importc: "error_code".}: napi_status
-
-  char16_t* = distinct Rune16
