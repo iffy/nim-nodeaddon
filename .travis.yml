@@ -25,6 +25,7 @@ matrix:
 
 install:
   - nvm install node && nvm alias default node
+  - npm install -g node-gyp
   - export CHOOSENIM_NO_ANALYTICS=1
   - curl https://nim-lang.org/choosenim/init.sh -sSf > init.sh
   - sh init.sh -y
