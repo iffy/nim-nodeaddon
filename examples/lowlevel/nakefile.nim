@@ -13,7 +13,8 @@ task "build", "Build the native addon":
   echo "copyfile"
   copyFile("native"/"nimbase.h", "native"/"csrc"/"nimbase.h")
   echo "node-gyp"
-  direShell findExe"node-gyp", "rebuild"
+  direShell "node-gyp", "rebuild"
+  echo "copy .node files"
   let node_files = toSeq(walkDir("build"/"Release")).mapIt(it.path).filterIt(it.endsWith(".node"))
   for node_file in node_files:
     copyFile(node_file, "native"/(node_file.extractFilename))
