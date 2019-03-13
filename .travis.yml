@@ -31,9 +31,12 @@ install:
   - export PATH=~/.nimble/bin:$PATH
   - echo "export PATH=~/.nimble/bin:$PATH" >> ~/.profile
   - choosenim $CHANNEL
+  - nimble install -y
   - nimble install -y nake
 
 script:
+  - node -v
+  - npm -v
   - nimble refresh
   - nimble test
   - nake functest
