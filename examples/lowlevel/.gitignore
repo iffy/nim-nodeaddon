@@ -1,5 +1,5 @@
 build
 csrc
-native
 node_modules
 nakefile
+*.node
