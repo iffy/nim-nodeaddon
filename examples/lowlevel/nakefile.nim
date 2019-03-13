@@ -7,6 +7,7 @@ task defaultTask, "Build the native addon":
   runTask "build"
 
 task "build", "Build the native addon":
+  direShell "ls", "-R"
   echo "nim cpp ..."
   direShell findExe"nim", "cpp", "--compileOnly", "--gc:regions", "--nimcache:"&"native"/"csrc", "--header", "native"/"main.nim"
   echo "copyfile"
