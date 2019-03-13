@@ -6,7 +6,7 @@ description   = "Library for making NodeJS addons in Nim"
 license       = "MIT"
 srcDir        = "src"
 installExt    = @["nim"]
-bin           = @["nim_nodeaddon"]
+bin           = @["nodeaddon"]
 
 
 # Dependencies
