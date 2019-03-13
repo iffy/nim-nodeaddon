@@ -7,8 +7,11 @@ task defaultTask, "Build the native addon":
   runTask "build"
 
 task "build", "Build the native addon":
+  echo "nim cpp ..."
   direShell findExe"nim", "cpp", "--compileOnly", "--gc:regions", "--nimcache:"&"native"/"csrc", "--header", "native"/"main.nim"
+  echo "copyfile"
   copyFile("native"/"nimbase.h", "native"/"csrc"/"nimbase.h")
+  echo "node-gyp"
   direShell findExe"node-gyp", "rebuild"
   let node_files = toSeq(walkDir("build"/"Release")).mapIt(it.path).filterIt(it.endsWith(".node"))
   for node_file in node_files:
@@ -25,4 +28,5 @@ task "clean", "Remove all built files":
 
 task "test", "Test the native addon":
   runTask "build"
+  echo "node tests/test.js"
   direShell findExe"node", "tests"/"test.js"
