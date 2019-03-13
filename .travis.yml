@@ -38,6 +38,9 @@ install:
 script:
   - node -v
   - npm -v
+  - npm bin
+  - npm config get prefix
+  - which node-gyp
   - nimble refresh
   - nimble test
   - nake functest
