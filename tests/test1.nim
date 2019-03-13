@@ -7,6 +7,5 @@
 
 import unittest
 
-import nodeaddonpkg/lowlevel
 test "correct welcome":
   check 1 == 1
