@@ -29,6 +29,7 @@ install:
 build_script:
   - nimble.exe install -y
   - nimble.exe install -y nake
+  - echo %PATH%
 
 test_script:
   - nimble.exe test
