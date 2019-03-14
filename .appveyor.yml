@@ -28,6 +28,7 @@ install:
   - cinst nodejs.install
 
 build_script:
+  - npm install -g node-gyp
   - nimble.exe install -y
   - nimble.exe install -y nake
   - echo %PATH%
