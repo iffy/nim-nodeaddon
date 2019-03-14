@@ -1,0 +1,5 @@
+build
+csrc
+node_modules
+nakefile
+*.node

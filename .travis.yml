@@ -1,0 +1,51 @@
+
+
+dist: trusty
+language: c
+
+cache: ccache
+cache:
+  directories:
+  - .cache
+
+matrix:
+  include:
+    # Build and test against the master (stable) and devel branches of Nim
+    - os: linux
+      env: CHANNEL=stable
+      compiler: gcc
+
+    - os: linux
+      env: CHANNEL=devel
+      compiler: gcc
+
+    - os: osx
+      env: CHANNEL=stable
+      compiler: clang
+
+install:
+  - nvm install node && nvm alias default node
+  - npm install -g node-gyp
+  - export CHOOSENIM_NO_ANALYTICS=1
+  - curl https://nim-lang.org/choosenim/init.sh -sSf > init.sh
+  - sh init.sh -y
+  - export PATH=~/.nimble/bin:$PATH
+  - echo "export PATH=~/.nimble/bin:$PATH" >> ~/.profile
+  - choosenim $CHANNEL
+  - nimble install -y
+  - nimble install -y nake
+
+script:
+  - node -v
+  - npm -v
+  - npm bin
+  - npm config get prefix
+  - which node-gyp
+  - nimble refresh
+  - nimble test
+  - nake functest
+
+branches:
+  except:
+    - gh-pages
+
