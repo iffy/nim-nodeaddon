@@ -10,7 +10,7 @@ task "build", "Build the native addon":
   var compile_args:seq[string]
   compile_args.add([findExe"nim", "cpp", "--compileOnly", "--gc:regions", "--nimcache:"&"native"/"csrc", "--header"])
   when defined(windows):
-    compile_args.add("--cc:vcc", "--verbosity:2")
+    compile_args.add(["--cc:vcc", "--verbosity:2"])
   compile_args.add("native"/"main.nim")
   direShell(compile_args)
 
