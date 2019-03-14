@@ -24,16 +24,18 @@ install:
   - IF not exist "%NIM_ARCHIVE%" appveyor DownloadFile "%NIM_URL%" -FileName "%NIM_ARCHIVE%"
   - 7z x -y "%NIM_ARCHIVE%" -o"%CD%\tools_tmp"> nul
   - SET PATH=%CD%\tools_tmp\%NIM_DIR%\bin;%CD%\tools_tmp\%MINGW_DIR%\bin;%PATH%
+  - SET PATH=%USERPROFILE%\.nimble\bin;%PATH%
   - cinst nodejs.install
 
 build_script:
   - nimble.exe install -y
   - nimble.exe install -y nake
   - echo %PATH%
+  - where nake
 
 test_script:
   - nimble.exe test
-  - nake.exe functest
+  - nake functest
 
 deploy: off
 
