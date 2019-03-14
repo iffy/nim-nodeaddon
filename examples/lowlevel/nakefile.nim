@@ -7,14 +7,15 @@ task defaultTask, "Build the native addon":
   runTask "build"
 
 task "build", "Build the native addon":
-  direShell "ls", "-R"
-  echo "nim cpp ..."
-  direShell findExe"nim", "cpp", "--compileOnly", "--gc:regions", "--nimcache:"&"native"/"csrc", "--header", "native"/"main.nim"
-  echo "copyfile"
+  var compile_args:seq[string]
+  compile_args.add([findExe"nim", "cpp", "--compileOnly", "--gc:regions", "--nimcache:"&"native"/"csrc", "--header"])
+  when defined(windows):
+    compile_args.add("--cc:vcc", "--verbosity:2")
+  compile_args.add("native"/"main.nim")
+  direShell(compile_args)
+
   copyFile("native"/"nimbase.h", "native"/"csrc"/"nimbase.h")
-  echo "node-gyp"
   direShell "node-gyp", "rebuild"
-  echo "copy .node files"
   let node_files = toSeq(walkDir("build"/"Release")).mapIt(it.path).filterIt(it.endsWith(".node"))
   for node_file in node_files:
     copyFile(node_file, "native"/(node_file.extractFilename))
@@ -30,5 +31,4 @@ task "clean", "Remove all built files":
 
 task "test", "Test the native addon":
   runTask "build"
-  echo "node tests/test.js"
   direShell findExe"node", "tests"/"test.js"
