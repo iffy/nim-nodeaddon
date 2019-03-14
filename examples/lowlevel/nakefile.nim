@@ -31,4 +31,4 @@ task "clean", "Remove all built files":
 
 task "test", "Test the native addon":
   runTask "build"
-  direShell findExe"node", "tests"/"test.js"
+  direShell "node", "tests"/"test.js"
