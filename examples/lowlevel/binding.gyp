@@ -3,7 +3,7 @@
         {
             "target_name": "myaddon",
             "sources": [
-                "<!@(node -p \"require('fs').readdirSync('./native/csrc').map(f=>'native/csrc/'+f).join(' ')\")",
+                "<!@(node -p \"require('fs').readdirSync('./nimbuild/csrc').map(f=>'nimbuild/csrc/'+f).join(' ')\")",
             ],
             'cflags!': [ '-fno-exceptions' ],
             'cflags_cc!': [ '-fno-exceptions' ],
