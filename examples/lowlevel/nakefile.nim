@@ -19,8 +19,6 @@ task "build", "Build the native addon":
   let node_files = toSeq(walkDir("build"/"Release")).mapIt(it.path).filterIt(it.endsWith(".node"))
   for node_file in node_files:
     copyFile(node_file, "native"/(node_file.extractFilename))
-  # js_files = ts_files.mapIt(it.replace(".ts", ".js").replace("jssrc"/"", "dist"/""))
-  # copyFile("build"/"Release"/"index.node", "native"/"index.node")
 
 task "clean", "Remove all built files":
   removeDir "build"
