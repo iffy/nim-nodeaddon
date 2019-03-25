@@ -16,8 +16,12 @@ when not defined(NAPI_VERSION):
 ##  If you need __declspec(dllimport), either include <node_api.h> instead, or
 ##  define  as __declspec(dllimport) on the compiler's command line.
 
-const
-  NAPI_AUTO_LENGTH*: csize = cast[uint32](-1).csize
+when sizeof(int) == 4: # 32bit // defined(i386) or defined(ia):
+  const
+    NAPI_AUTO_LENGTH*: csize = cast[uint32](-1).csize
+else:
+  const
+    NAPI_AUTO_LENGTH*: csize = cast[uint64](-1).csize
 
 proc napi_get_last_error_info*(env: napi_env;
                               result: ptr ptr napi_extended_error_info): napi_status {.
