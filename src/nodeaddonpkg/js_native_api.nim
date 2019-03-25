@@ -16,9 +16,9 @@ when not defined(NAPI_VERSION):
 ##  If you need __declspec(dllimport), either include <node_api.h> instead, or
 ##  define  as __declspec(dllimport) on the compiler's command line.
 
-when sizeof(int) == 4: # 32bit // defined(i386) or defined(ia):
+when sizeof(int) == 4: # 32bit
   const
-    NAPI_AUTO_LENGTH*: csize = cast[uint32](-1).csize
+    NAPI_AUTO_LENGTH*: csize = 2147483647 # cast[uint32](-1).csize
 else:
   const
     NAPI_AUTO_LENGTH*: csize = cast[uint64](-1).csize
