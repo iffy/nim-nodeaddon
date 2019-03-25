@@ -17,7 +17,7 @@ when not defined(NAPI_VERSION):
 ##  define  as __declspec(dllimport) on the compiler's command line.
 
 const
-  NAPI_AUTO_LENGTH*: csize = cast[uint64](-1).csize
+  NAPI_AUTO_LENGTH*: csize = cast[uint32](-1).csize
 
 proc napi_get_last_error_info*(env: napi_env;
                               result: ptr ptr napi_extended_error_info): napi_status {.
