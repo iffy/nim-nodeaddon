@@ -1,12 +1,11 @@
 # Package
 
-version       = "0.1.0"
+version       = "0.2.0"
 author        = "Matt Haggard"
 description   = "Library for making NodeJS addons in Nim"
 license       = "MIT"
 srcDir        = "src"
 installExt    = @["nim"]
-bin           = @["nodeaddon"]
 
 
 # Dependencies
