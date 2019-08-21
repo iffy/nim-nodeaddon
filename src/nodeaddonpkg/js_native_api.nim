@@ -1,4 +1,7 @@
-import js_native_api_types
+##  This file needs to be compatible with C compilers.
+
+import ./js_native_api_types
+export js_native_api_types
 
 ##  Use INT_MAX, this should only be consumed by the pre-processor anyway.
 
@@ -10,11 +13,16 @@ when not defined(NAPI_VERSION):
     const
       NAPI_VERSION* = NAPI_VERSION_EXPERIMENTAL
   else:
-    ##  The baseline version for N-API
+    ##  The baseline version for N-API.
+    ##  The NAPI_VERSION controls which version will be used by default when
+    ##  compilling a native addon. If the addon developer specifically wants to use
+    ##  functions available in a new version of N-API that is not yet ported in all
+    ##  LTS versions, they can set NAPI_VERSION knowing that they have specifically
+    ##  depended on that version.
     const
       NAPI_VERSION* = 4
 ##  If you need __declspec(dllimport), either include <node_api.h> instead, or
-##  define  as __declspec(dllimport) on the compiler's command line.
+##  define NAPI_EXTERN as __declspec(dllimport) on the compiler's command line.
 
 when sizeof(int) == 4: # 32bit
   const
@@ -22,6 +30,7 @@ when sizeof(int) == 4: # 32bit
 else:
   const
     NAPI_AUTO_LENGTH*: csize = cast[uint64](-1).csize
+
 
 proc napi_get_last_error_info*(env: napi_env;
                               result: ptr ptr napi_extended_error_info): napi_status {.
@@ -382,3 +391,9 @@ when defined(NAPI_EXPERIMENTAL):
                           native_object: pointer; finalize_cb: napi_finalize;
                           finalize_hint: pointer; result: ptr napi_ref): napi_status {.
       importcpp: "napi_add_finalizer(@)", header: "node_api.h".}
+  ##  Instance data
+  proc napi_set_instance_data*(env: napi_env; data: pointer;
+                              finalize_cb: napi_finalize; finalize_hint: pointer): napi_status {.
+      importcpp: "napi_set_instance_data(@)", header: "node_api.h".}
+  proc napi_get_instance_data*(env: napi_env; data: ptr pointer): napi_status {.
+      importcpp: "napi_get_instance_data(@)", header: "node_api.h".}

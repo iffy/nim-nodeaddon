@@ -1,13 +1,14 @@
 [![Build Status](https://travis-ci.org/iffy/nim-nodeaddon.svg?branch=master)](https://travis-ci.org/iffy/nim-nodeaddon)
 [![Build status](https://ci.appveyor.com/api/projects/status/4bsvvhyb8woy9dxb/branch/master?svg=true)](https://ci.appveyor.com/project/iffy/nim-nodeaddon/branch/master)
 
-## Notes
+## Generating these bindings
 
+- Install c2nim with `nimble install c2nim`
+- Download the header files: `nake download` (look in `orig/`)
+- Turn them into Nim files: `nake convert` (they end up in `orig/` and in `src/nodeaddonpkg/`)
+- Manually adjust the files in `src/nodeaddonpkg/`
 
-I created `js_native_api.nim` and `js_native_api_types.nim` using `c2nim` something like this:
+## Tests
 
-```
-c2nim --cpp --header js_native_api.h
-```
+Run tests with `./runtests.sh`
 
-But I had to modify each file to get them to work.

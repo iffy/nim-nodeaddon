@@ -1,12 +1,23 @@
+#ifdef C2NIM
+# def NAPI_EXTERN
+# def EXTERN_C_START
+# def EXTERN_C_END
+# def EXTERN
+# def NAPI_NO_RETURN
+# def BUILDING_NODE_EXTENSION
+# def NAPI_MODULE_EXPORT
+#endif
+
+# header "node_api.h"
 #ifndef SRC_JS_NATIVE_API_TYPES_H_
 #define SRC_JS_NATIVE_API_TYPES_H_
 
-#include <stddef.h>
-#include <stdint.h>
+// This file needs to be compatible with C compilers.
+// This is a public include file, and these includes have essentially
+// became part of it's API.
+#include <stddef.h>  // NOLINT(modernize-deprecated-headers)
+#include <stdint.h>  // NOLINT(modernize-deprecated-headers)
 
-#if !defined __cplusplus || (defined(_MSC_VER) && _MSC_VER < 1900)
-    typedef uint16_t char16_t;
-#endif
 
 // JSVM API types are all opaque pointers for ABI stability
 // typedef undefined structs instead of void* for compile time type safety
@@ -78,6 +89,10 @@ typedef enum {
   napi_bigint_expected,
   napi_date_expected,
 } napi_status;
+// Note: when adding a new enum value to `napi_status`, please also update
+// `const int last_status` in `napi_get_last_error_info()' definition,
+// in file js_native_api_v8.cc. Please also update the definition of
+// `napi_status` in doc/api/n-api.md to reflect the newly added value(s).
 
 typedef napi_value (*napi_callback)(napi_env env,
                                     napi_callback_info info);

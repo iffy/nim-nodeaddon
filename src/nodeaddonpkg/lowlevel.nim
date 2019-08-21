@@ -4,6 +4,8 @@ import ./js_native_api_types
 export js_native_api_types
 import ./js_native_api
 export js_native_api
+import ./node_api
+export node_api
 
 type
   napi_value_array* = ptr napi_value
