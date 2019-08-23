@@ -10,5 +10,5 @@
 
 ## Tests
 
-Run tests with `./runtests.sh`
+Run tests with `nake test`
 

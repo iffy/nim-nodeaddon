@@ -1,5 +1,6 @@
-import
-  ./js_native_api, ./node_api_types
+import ./js_native_api
+import ./js_native_api_types
+import ./node_api_types
 
 discard "forward decl of uv_loop_s"
 

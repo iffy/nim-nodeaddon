@@ -16,10 +16,16 @@ task defaultTask, "Build the native addon":
 task "build", "Build the native addon":
   createDir(csrcpath)
   var compile_args:seq[string]
-  compile_args.add([findExe"nim", "cpp", "--compileOnly", "--gc:regions", "--nimcache:"&csrcpath, "--header"])
+  compile_args.add([findExe"nim", "cpp",
+    "--compileOnly",
+    "--gc:regions",
+    # "--threads:on",
+    "--nimcache:"&csrcpath,
+    "--header"])
   when defined(windows):
     compile_args.add(["--cc:vcc", "--verbosity:2"])
   compile_args.add(mainsrc)
+  echo "compile_args: ", compile_args
   direShell(compile_args)
 
   if not existsFile(csrcpath/"nimbase.h"):

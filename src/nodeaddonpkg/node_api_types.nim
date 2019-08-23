@@ -19,9 +19,9 @@ when NAPI_VERSION >= 4:
         importcpp: "napi_threadsafe_function_call_mode", header: "node_api.h".} = enum
       napi_tsfn_nonblocking, napi_tsfn_blocking
 type
-  napi_async_execute_callback* = proc (env: napi_env; data: pointer)
+  napi_async_execute_callback* = proc (env: napi_env; data: pointer) {.cdecl.}
   napi_async_complete_callback* = proc (env: napi_env; status: napi_status;
-                                     data: pointer)
+                                     data: pointer) {.cdecl.}
 
 when NAPI_VERSION >= 4:
   type

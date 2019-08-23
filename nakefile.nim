@@ -5,10 +5,33 @@ import sequtils
 import re
 import algorithm
 
+const test_dirs = @[
+  "examples"/"lowlevel",
+]
+
+template removeIfExists(x:string):untyped =
+  if x.existsFile():
+    x.removeFile()
+  elif x.existsDir():
+    x.removeDir()
+
+task "clean", "Clean build artifacts":
+  removeIfExists("nodeaddon")
+  for test_dir in test_dirs:
+    withDir(test_dir):
+      shell "nake", "clean"
+
+task "test", "Run all tests":
+  direShell "nimble", "refresh"
+  direShell "nimble", "install", "-y"
+  direShell "nimble", "test"
+  runTask "functest"
 
 task "functest", "Run the functional tests":
-  withDir("examples"/"lowlevel"):
-    direShell "nake", "test"
+  for test_dir in test_dirs:
+    echo "testing", test_dir
+    withDir(test_dir):
+      direShell "nake", "test"
 
 const linuxbuildertag = "nimnodeaddon:builder"
 

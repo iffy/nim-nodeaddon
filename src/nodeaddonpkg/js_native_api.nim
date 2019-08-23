@@ -1,7 +1,6 @@
 ##  This file needs to be compatible with C compilers.
 
 import ./js_native_api_types
-export js_native_api_types
 
 ##  Use INT_MAX, this should only be consumed by the pre-processor anyway.
 
