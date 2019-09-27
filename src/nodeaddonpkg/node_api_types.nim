@@ -26,7 +26,7 @@ type
 when NAPI_VERSION >= 4:
   type
     napi_threadsafe_function_call_js* = proc (env: napi_env; js_callback: napi_value;
-        context: pointer; data: pointer)
+        context: pointer; data: pointer) {.cdecl.}
 type
   napi_node_version* {.importcpp: "napi_node_version", header: "node_api.h", bycopy.} = object
     major* {.importc: "major".}: uint32
