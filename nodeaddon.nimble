@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.3.0"
+version       = "0.3.1"
 author        = "Matt Haggard"
 description   = "Library for making NodeJS addons in Nim"
 license       = "MIT"
